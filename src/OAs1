@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
 use warnings;
 use strict;
 use File::Basename; 
@@ -54,7 +54,7 @@ while(<F1>){
 		($fqID[1],$seq[1],$num[1],$qual[1])= &fqRead($l2,\*F2);
 	}
 	$total ++;
-	
+
 	# trim & filter
 	if($mode eq "PE"){
 		($Aqual[0],$PQ[0],$start[0],$len[0],$seq[0],$qual[0]) = &ca1_cut($Scut,$Qcut,$Qsys,$seq[0],$qual[0]);
@@ -114,7 +114,7 @@ my $tag = basename($pfx);
 print STAT "Total\tmax\tmin\tavgLen\tavgStart\tavgOA\tavgQ\tremain\trate\n";
 print STAT "$total\t$max_bp\t$min_bp\t$avgL\t$avgS\t$avgOA\t$avgQ\t$remainQ\t$rate\n";
 if($mode eq "PE"){
-	
+
 	print STAT "Read_1\tmax\tmin\tavgLen\tavgStart\tavgOA\tavgQ\n";
 	printf STAT ("%d\t%d\t%d\t%d\t%d\t%.4f\t%.0f\n",
 		$remainQ[0],$max_bp[0],$min_bp[0],$sum_bp[0]/$remainQ[0],$sum_s[0]/$remainQ[0],$sum_oa[0]/$remainQ[0],$sum_Q[0]/$remainQ[0]);
@@ -215,6 +215,3 @@ sub cumulate {
 	$sum_oa[$n] += $Aqual[$m];
 	$sum_Q[$n] += $PQ[$m];
 }
-
-
-
